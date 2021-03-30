@@ -1,0 +1,24 @@
+version: "3"
+services:
+  web:
+    restart: always
+    build:
+      #defining where the project files are
+      context: .
+      #defining where the custom dockerfile is
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      #refering container node_modules here
+      - /app/node_modules
+      #refering local folder for the latest changes
+      - .:/app
+  # new service to run the test but this wouldn't gives us the interactive mode
+  # tests:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - /app/node_modules
+  #     - .:/app
